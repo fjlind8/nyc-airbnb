@@ -12,7 +12,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(map);
 
 // loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
-$.getJSON("airbnb2016.geojson",function(data){
+d3.json("/output/airbnb2016.geojson",function(data){
     // L.geoJson function is used to parse geojson file and load on to map
     L.geoJson(data).addTo(map);
     });
@@ -22,7 +22,7 @@ $.getJSON("airbnb2016.geojson",function(data){
 // "35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson";
 
 // Uncomment this link local geojson for when data.beta.nyc is down
-// var link = "static/data/nyc.geojson";
+// var link = "/output/airbnb2016.geojson";
 
 // Grabbing our GeoJSON data..
 // d3.json(link, function(data) {
