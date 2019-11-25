@@ -1,7 +1,10 @@
 var map = L.map("map", {
   center: [40.7128, -74.0059],
-  zoom: 11
+  zoom: 10
 });
+
+var loc = window.location.pathname;
+console.log(loc);
 
 // Adding tile layer
 L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -11,11 +14,21 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(map);
 
-// loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
-d3.json("/output/airbnb2016.geojson",function(data){
-    // L.geoJson function is used to parse geojson file and load on to map
-    L.geoJson(data).addTo(map);
+function fetchJSON(url) {
+  return fetch(url)
+    .then(function(response) {
+      return response.json();
     });
+}
+
+// loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
+// d3.json("output/airbnb2016.geojson",function(data) {
+//     // L.geoJson function is used to parse geojson file and load on to map
+//     L.geoJson(data).addTo(map);
+//     });
+
+var data = fetchJSON('output/airbnb2016data.geojson')
+    .then(function(data) { return data })
 
 // If data.beta.nyc is down comment out this link
 // var link = "http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/" +
